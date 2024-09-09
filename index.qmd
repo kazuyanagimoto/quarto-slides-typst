@@ -1,0 +1,12 @@
+---
+title: "Gallery"
+listing:
+  contents: slides/**/*.qmd
+  sort: "date desc"
+  type: grid
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
+
