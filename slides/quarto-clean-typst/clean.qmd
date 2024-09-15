@@ -10,9 +10,11 @@ author:
     email: kazuharu.yanagimoto@cemfi.edu.es
     affiliations: CEMFI
 format:
-  cleantouying-typst:
+  clean-typst:
     bibliographystyle: "chicago-author-date"
     font-paths: ["static/fonts"]
+    include-in-header: "custom.typ"
+    commands: [small-cite]
 execute: 
   echo: false
   warning: false
@@ -41,7 +43,7 @@ can be used with this theme
 
 ## Before You Go...
 
-The [clean theme](https://github.com/kazuyanagimoto/quarto-cleantouying-typst) does not depend on any languages.
+The [clean theme](https://github.com/kazuyanagimoto/quarto-clean-typst) does not depend on any languages.
 You can use it with any language supported by Quarto, including R, Python, Julia.
 
 For this demo, I use R code to show the figures and tables usage in the slides.
@@ -55,7 +57,7 @@ For this demo, I use R code to show the figures and tables usage in the slides.
 R Packages:
 
 ```{.r}
-install.packages(c("modelsummary", "tinytable", "dplyr", "ggplot2"))
+install.packages(c("palmerpenguins", "modelsummary", "tinytable", "dplyr", "ggplot2"))
 ```
 
 :::
@@ -82,12 +84,11 @@ And next we have an ordered one.
 
 ### Alerts & Cross-refs {#sec-crossref}
 
-### Some extra things you can do with the clean theme
 
 Special classes for emphasis
 
 - `.alert` class for default emphasis, e.g. [the second accent color]{.alert}.
-- `.fg` class for custom color, e.g. [with `fill="#5D639E"`]{.fg fill="#5D639E"}.
+- `.fg` class for custom color, e.g. [with `options='fill: rgb("#5D639E")'`]{.fg options='fill: rgb("#5D639E")'}.
 - `.bg` class for custom background, e.g. [with the default color]{.bg}.
 
 To cross-reference, you have several options, for example:
@@ -103,7 +104,7 @@ Citations follow the standard
 [Quarto format](https://quarto.org/docs/authoring/footnotes-and-citations.html#citations)
 and be sourced from BibLaTeX, BibTeX, or CLS files. For example:
 
- - [Topic 1:]{.alert} Review of DID [@arkhangelsky2024]
+- [Topic 1:]{.alert} Review of DID [@arkhangelsky2024]
 
 - [Topic 2:]{.alert} @goodman-bacon2021
 
@@ -113,7 +114,7 @@ In many cases, you may want to use small citations, like
 
 - [Staggered DID]{.alert} [[@callaway2021;@sun2021;@borusyak2024]]{.small-cite}
 
-A helper class `.small-cite` is provided for this purpose.
+This `.small-cite` class is defined as a custom style [[custom styling]{.button}](#sec-custom-styling)
 
 ## Components
 
@@ -139,30 +140,6 @@ $$
 :::
 
 
-## Components {#sec-animations}
-
-### Animations
-
-{{< pause >}}
-
-Touying's [simple animations](https://touying-typ.github.io/docs/dynamic/simple) is available as `{{{< pause >}}}` and `{{{< meanwhile >}}}`
-
-{{< pause >}}
-
-**Animations in Lists**
-
-Simple animations can be used in lists
-
-- First {{< pause >}}
-- Second
-
-{{< pause >}}
-
-**Other Features**
-
-- `pause` and `meanwhile` can use in Typst Math code [[Appendix]{.button}](#sec-math-animations)
-- `handout: true` in YAML header is available for handout mode (without animations)
-
 ## Ad-hoc Styling
 
 ### Typst CSS
@@ -187,13 +164,34 @@ You can also change the font size and family for `div` elements.
 
 This is a `2em` vertical spaced from above.
 
+## Custom Styling {#sec-custom-styling}
+
+As [latex-environment](https://github.com/quarto-ext/latex-environment) quarto extenstion, you can define custom `div` and `span` elements.
+
+```yaml
+format:
+  clean-typst:
+    include-in-header: "custom.typ"
+    commands: [foo]
+```
+
+- You can define custom `div` and `span` elements as Typst functions in `custom.typ` 
+  - `environments` in YAML is for block elements `:::{.foo}\nbody\n:::`
+  - `commands` in YAML is for inline elements `[]{.foo}`
+- `[text]{.foo options="opts"}` is converted to `#foo(opts)[text]` internally
+- If you want to use `self` as an argument, you can use `touying-fn-wrapper()`
+
+
+
+
+
 ## YAML Settings
 
 ### Fonts
 
 ```yaml
 format:
-  cleantouying-typst:
+  clean-typst:
     font-size: 20pt
     font-heading: Josefin Sans
     font-body: Montserrat
@@ -213,7 +211,7 @@ format:
 
 ```yaml
 format:
-  cleantouying-typst:
+  clean-typst:
     color-jet: "#272822"
     color-accent: "$accent$"
     color-accent2: "$accent2$"
@@ -222,6 +220,51 @@ format:
 - `color-jet` is the main color for text. `#000000` is too dark, and the default is `#131516`
 - `color-accent` is used for the subtitle of the slide, buttons, lists, and the link colors
 - `color-accent2` is used for the alert colors
+
+# Animations
+
+## Simple Animations {#sec-simple-animation}
+
+Touying's [simple animations](https://touying-typ.github.io/docs/dynamic/simple) is available as `{{{< pause >}}}` and `{{{< meanwhile >}}}`
+
+{{< pause >}}
+
+**Animations in Lists**
+
+Simple animations can be used in lists
+
+- First {{< pause >}}
+- Second
+
+
+## Complex Animations {#sec-complex-animation}
+
+:::: {.complex-anim repeat=4}
+
+Touying's [complex animations](https://touying-typ.github.io/docs/dynamic/complex) is available as `{.complex-anim repeat=4}` environment.
+
+
+At subslide `#self.subslide`{=typst}, we can
+
+use [`{.uncover}` environment]{.uncover options='"2-"'} for reserving space,
+
+use [`{.only}` environment]{.only options='"2-"'} for not reserving space,
+
+```{=typst}
+#alternatives[call `#only` multiple times \u{2717}][use `#alternatives` function #sym.checkmark] for choosing one of the alternatives. But only works in a native Typst code. \
+```
+
+::: {.only options='4'}
+
+### Other Features
+
+- All the animation functions can be used in Typst Math code [[Appendix]{.button}](#sec-math-animations)
+- `handout: true` in YAML header is available for handout mode (without animations)
+
+:::
+
+::::
+
 
 # Figures & Tables
 
@@ -336,9 +379,22 @@ This is an example of `layout-ncol: 2` for two figures.
 
 ## Tables
 
-```{=typst}
-#figure([
+```{r}
+theme_slides <- function(x, ...) {
+    fn <- function(table) {
+        if (isTRUE(table@output == "typst")) {
+          table@table_string <- paste0("#figure([\n", table@table_string, "\n])")
+        }
+        return(table)
+    }
+    x <- style_tt(x, finalize = fn)
+    x <- theme_tt(x, theme = "default")
+    return(x)
+}
+
+options(tinytable_tt_theme = theme_slides)
 ```
+
 
 ```{r}
 tt_sum <- penguins |>
@@ -355,21 +411,19 @@ tt_sum <- penguins |>
   tt() |>
   group_tt(j = list("Male" = 2:5, "Female" = 6:9)) |>
   format_tt(j = c(2:9), digits = 4)
+```
 
+:::: {.complex-anim repeat=3}
+
+::: {.only options='1'}
+
+```{r}
 tt_sum
 ```
 
-```{=typst}
-])
-```
+:::
 
-- You can easily create Typst tables by [`tinytable`](https://vincentarelbundock.github.io/tinytable/)
-
-## Tables
-
-```{=typst}
-#figure([
-```
+::: {.only options='"2-"'}
 
 ```{r}
 tt_sum |>
@@ -377,18 +431,15 @@ tt_sum |>
            color = "white", bold = TRUE)
 ```
 
-```{=typst}
-])
-```
+:::
 
-- You can easily create Typst tables by [`tinytable`](https://vincentarelbundock.github.io/tinytable/)
-- You can [highlight]{.alert} by `tinytable::style_tt()`!
+- You can easily create Typst tables by [`tinytable`](https://vincentarelbundock.github.io/tinytable/) {{< pause >}}
+- You can [highlight]{.alert} by `tinytable::style_tt()`! {{< pause >}}
+- Read the [GitHub Issue](https://github.com/vincentarelbundock/tinytable/issues/337) and see `theme_slides()` for the table without captions
+
+::::
 
 ## Regression Table
-
-```{=typst}
-#figure([
-```
 
 ```{r}
 cm <- c(
@@ -416,18 +467,16 @@ list("(1)" = lm(bill_length_mm ~ species, data = penguins),
   group_tt(j = list("Bill Length (mm)" = 2:4, "Body Mass (g)" = 5:7))
 ```
 
-```{=typst}
-])
-```
 
 [modelsummary](https://modelsummary.com) is a super useful for regression tables (`tinytable` is used internally)
+
 
 ## Last Words {#sec-last}
 
 ### Installation
 
 ```{.bash}
-quarto install extension kazuyanagimoto/quarto-cleantouying-typst
+quarto install extension kazuyanagimoto/quarto-clean-typst
 ```
 
 ### Limitations
@@ -435,7 +484,6 @@ quarto install extension kazuyanagimoto/quarto-cleantouying-typst
 - Multiple columns are not supported
   - You can use [page columnization](https://touying-typ.github.io/docs/layout#page-columnization) of Touying [[Appendix]{.button}](#sec-multicolumns)
   - Not perfect, but a workaround
-- More complex animations are available in Toying, see [Complex Animations](https://touying-typ.github.io/docs/dynamic/complex)
 - Background colors and images are not supported
 
 
@@ -476,7 +524,7 @@ Touying equation is very simple.
 
 
 
-[[Back to main]{.button}](#sec-animations)
+[[Back to main]{.button}](#sec-complex-animation)
 
 ## Multiple Columns {#sec-multicolumns}
 
