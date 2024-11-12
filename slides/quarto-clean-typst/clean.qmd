@@ -275,6 +275,8 @@ library(ggplot2)
 library(tinytable)
 library(modelsummary)
 library(showtext)
+
+options(tinytable_quarto_figure = TRUE) # Figures without captions
 ```
 
 ```{r}
@@ -324,6 +326,10 @@ theme_quarto <- function(font_title = font_base_regular,
         )
 }
 ```
+
+## Figures
+
+![](img/hokusai_kanagawa.jpg){width="50%" fig-align="center"}
 
 ## Figures
 
@@ -380,19 +386,7 @@ This is an example of `layout-ncol: 2` for two figures.
 ## Tables
 
 ```{r}
-theme_slides <- function(x, ...) {
-    fn <- function(table) {
-        if (isTRUE(table@output == "typst")) {
-          table@table_string <- paste0("#figure([\n", table@table_string, "\n])")
-        }
-        return(table)
-    }
-    x <- style_tt(x, finalize = fn)
-    x <- theme_tt(x, theme = "default")
-    return(x)
-}
-
-options(tinytable_tt_theme = theme_slides)
+options(tinytable_quarto_figure = TRUE)
 ```
 
 
