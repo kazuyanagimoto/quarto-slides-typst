@@ -57,7 +57,7 @@ For this demo, I use R code to show the figures and tables usage in the slides.
 R Packages:
 
 ```{.r}
-install.packages(c("palmerpenguins", "modelsummary", "tinytable", "dplyr", "ggplot2"))
+install.packages(c("palmerpenguins", "modelsummary", "tinytable", "dplyr", "ggplot2", "showtext"))
 ```
 
 :::
@@ -139,6 +139,50 @@ $$
 
 :::
 
+## Components
+
+### Multicolumn I: Text only
+
+:::: {layout-ncol=2}
+
+::: {#first-column}
+
+[Column 1]{.alert}
+
+Here is a long sentence that will wrap onto the next line as it hits the column
+width, and continue this way until it stops.
+
+Some text that should be laid out below the code
+
+:::
+
+::: {#second-column}
+
+[Column 2]{.alert}
+
+Some other text in another column.
+
+A second paragraph.
+
+:::
+
+::::
+
+[Quarto's layout](https://quarto.org/docs/authoring/figures.html#block-layout) is more simple and flexible than Touying's native multicolumn support.
+
+## Components
+### Multicolumn II: Text and Figures
+
+::: {layout-ncol=2}
+
+![](img/hokusai_kanagawa.jpg)
+
+- First point
+- Second point
+
+:::
+
+For simple cases, you don't even need to specify the class for each column.
 
 ## Ad-hoc Styling
 
@@ -327,9 +371,7 @@ theme_quarto <- function(font_title = font_base_regular,
 }
 ```
 
-## Figures
 
-![](img/hokusai_kanagawa.jpg){width="50%" fig-align="center"}
 
 ## Figures
 
@@ -475,11 +517,7 @@ quarto install extension kazuyanagimoto/quarto-clean-typst
 
 ### Limitations
 
-- Multiple columns are not supported
-  - You can use [page columnization](https://touying-typ.github.io/docs/layout#page-columnization) of Touying [[Appendix]{.button}](#sec-multicolumns)
-  - Not perfect, but a workaround
 - Background colors and images are not supported
-
 
 ### Appendix
 
@@ -488,8 +526,6 @@ quarto install extension kazuyanagimoto/quarto-clean-typst
 {{< appendix >}}
 
 # Appendix {#sec-appendix}
-
-
 
 ## Touying Math Animations {#sec-math-animations}
 
@@ -519,33 +555,6 @@ Touying equation is very simple.
 
 
 [[Back to main]{.button}](#sec-complex-animation)
-
-## Multiple Columns {#sec-multicolumns}
-
-```{=typst}
-#slide[
-```
-
-[Column 1]{.alert}
-
-Here is a long sentence that will wrap onto the next line as it hits the column
-width, and continue this way until it stops.
-
-[[Back to main]{.button}](#sec-last)
-
-```{=typst}
-][
-```
-
-[Column 2]{.alert}
-
-Some other text in another column.
-
-A second paragraph.
-
-```{=typst}
-]
-```
 
 ## References
 
