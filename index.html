@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,10 +37,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-97b0e5b29b3eae39caf5791471987d12.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,9 +80,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-subtitle','listing-description','listing-image','listing-links',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
+      searchColumns: ["listing-title","listing-subtitle","listing-description","listing-image","listing-links"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -187,37 +189,53 @@ window.Quarto = {
 
 
 
+<p><i class="fa-solid fa-this-is-placeholder-for-fa" aria-label="this-is-placeholder-for-fa"></i></p>
 
 
 
 
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-date-sort="1732320000000" data-listing-file-modified-sort="1732360698449" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2399">
-<a href="./slides/quarto-clean-typst/clean.pdf" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="./slides/quarto-clean-typst/thumbnail.svg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Quarto Clean Theme
-</h5>
-<div class="card-text listing-description">
-
-</div>
-<div class="card-attribution card-text-small justify">
-<div class="listing-author">
-Kazuharu Yanagimoto
-</div>
-<div class="listing-date">
-Nov 23, 2024
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
+<div class="quarto-listing quarto-listing-container-custom" id="listing-listing">
+<div class="gallery">
+    
+    <div class="gallery-entry">
+        <div class="body">
+            <p class="gallery-title">
+                
+                <a href="https://kazuyanagimoto.com/quarto-clean-typst/template-full.pdf" target="_blank">Quarto Clean Theme</a> 
+                
+            </p>
+            <p class="gallery-description">A demo for <a href="https://github.com/kazuyanagimoto/quarto-clean-typst">quarto-clean-typst</a> theme.</p>
+            <ul class="gallery-links">
+                
+                <li class="gallery-link">
+                    
+                    <a href="">
+                    
+                        <i class="fa-brands fa-github"></i> Code
+                    </a>
+                </li>
+                
+                <li class="gallery-link">
+                    
+                    <a href="">
+                    
+                        <i class="fa-solid fa-file-pdf"></i> Slides
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+        
+            <div class="thumbnail">
+                
+                    <a href="https://kazuyanagimoto.com/quarto-clean-typst/template-full.pdf" target="_blank">
+                        <img src="https://github.com/kazuyanagimoto/quarto-clean-typst/blob/main/static/img/thumbnail.svg?raw=true" alt="Quarto Clean Theme" title="Quarto Clean Theme">
+                    </a>
+                
+            </div>
+        
+    </div>
+    
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -305,8 +323,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -417,7 +433,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
