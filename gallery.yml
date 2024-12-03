@@ -1,0 +1,12 @@
+- title: Quarto Clean Theme
+  subtitle: A Minimalistic Theme for Quarto + Typst + Touying
+  description: A demo for <a href="https://github.com/kazuyanagimoto/quarto-clean-typst">quarto-clean-typst</a> theme.
+  image: https://github.com/kazuyanagimoto/quarto-clean-typst/blob/main/static/img/thumbnail.svg?raw=true
+  path: https://kazuyanagimoto.com/quarto-clean-typst/template-full.pdf
+  links:
+    - name: Code
+      url: https://github.com/kazuyanagimoto/quarto-clean-typst/blob/main/template-full.qmd
+      icon: fa-brands fa-github
+    - name: Slides
+      url: https://kazuyanagimoto.com/quarto-clean-typst/template-full.pdf
+      icon: fa-solid fa-file-pdf

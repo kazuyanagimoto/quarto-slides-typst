@@ -1,7 +1,10 @@
 ---
 title: "Gallery"
 listing:
-  contents: slides/**/*.qmd
+  contents:
+    - slides/**/*.qmd
+    - gallery.yml
+  template: listing.ejs
   sort: "date desc"
   type: grid
   sort-ui: false
@@ -10,3 +13,4 @@ page-layout: full
 title-block-banner: true
 ---
 
+{{< fa this-is-placeholder-for-fa >}}

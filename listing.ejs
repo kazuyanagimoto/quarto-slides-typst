@@ -1,0 +1,42 @@
+```{=html}
+<div class="gallery">
+    <% for (const item of items) { %>
+    <div class="gallery-entry">
+        <div class="body">
+            <p class="gallery-title">
+                <% if (item.path) { %>
+                <a href="<%= item.path %>" target="_blank"><%= item.title %></a> 
+                <% } else { %>
+                <%= item.title %> 
+                <% } %>
+            </p>
+            <p class="gallery-description"><%= item.description %></p>
+            <ul class="gallery-links">
+                <% for (const link of item.links) { %>
+                <li class="gallery-link">
+                    <% if (link.local) { %>
+                    <a href="<%- item.path.substring(0, item.path.lastIndexOf('/')) %>/<%- link.path %>">
+                    <% } else { %>
+                    <a href="<%- link.url %>">
+                    <% } %>
+                        <i class="<%- link.icon %>"></i> <%= link.name %>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <% if (item.image) { %>
+            <div class="thumbnail">
+                <% if (item.path) { %>
+                    <a href="<%= item.path %>" target="_blank">
+                        <img src="<%= item.image %>" alt="<%= item.title %>" title="<%= item.title %>" />
+                    </a>
+                <% } else { %>
+                    <img src="<%= item.image %>" alt="<%= item.title %>" title="<%= item.title %>" />
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+    <% } %>
+</div>
+```

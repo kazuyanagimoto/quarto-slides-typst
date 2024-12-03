@@ -1,0 +1,73 @@
+/*-- scss:defaults --*/
+
+$link-color: #517699;
+
+/*-- scss:rules --*/
+
+.gallery {
+    .gallery-entry {
+        display: flex;
+        flex-direction: row;
+        font-family: $font-family-sans-serif;
+        line-height: 1.3;
+        margin-bottom: 0.3em;
+        column-gap: 0.7em;
+
+        a {
+            text-decoration: none;
+        }
+
+        .metadata {
+            flex: 0 0 8%;
+        }
+
+        .body {
+            flex: 1 1 auto;
+        }
+
+        .thumbnail {
+            flex: 0 0 50%;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+                max-height: 200px;
+                object-position: top;
+            }
+        }
+
+        .gallery-title {
+            font-family: $headings-font-family;
+            font-weight: 500;
+            font-size: 1.3em;
+            margin-bottom: 0.2em;
+        }
+        
+
+        .gallery-description {
+            font-weight: 500;
+            font-size: 1.0em;
+            margin-bottom: 0.5em;
+        }
+
+        .date {
+            font-weight: 300;
+            font-size: 0.85em;
+            margin-top: 0.3em;
+            text-align: right;
+        }
+
+        ul.gallery-links {
+            padding: 0;
+            margin-bottom: 0;
+
+            .gallery-link {
+                display: inline-block;
+                white-space: nowrap;
+                padding: 0.3em 0.5em;
+                font-size: 0.85em;
+            }
+        }
+
+    }
+}

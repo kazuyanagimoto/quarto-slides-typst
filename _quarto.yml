@@ -12,6 +12,7 @@ format:
   html:
     theme:
       - yeti
+      - custom.scss
 
 execute: 
   freeze: auto
